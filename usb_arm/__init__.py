@@ -41,6 +41,7 @@ class BitPattern(object):
     def __str__(self):
         return self.__repr__()
 
+    
 GripsClose =       BitPattern(1, 0, 0)
 CloseGrips =       GripsClose
 GripsOpen =        BitPattern(2, 0, 0)
@@ -82,7 +83,7 @@ class Arm(object):
     def move(self, pattern, time=1):
         """Perform a pattern move with timing and stop"""
         try:
-            delf.tell(pattern)
+            self.tell(pattern)
             sleep(time)
         finally:
             self.tell(Stop)
