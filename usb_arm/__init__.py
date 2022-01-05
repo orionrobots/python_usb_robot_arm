@@ -1,5 +1,5 @@
 """Maplin USB Robot arm control.
-Usage - 
+Usage -
 >>> import usb_arm
 >>> arm = usb_arm.Arm()
 >>> arm.move(usb_arm.OpenGrips)
@@ -31,7 +31,7 @@ class BitPattern(object):
         return BitPattern(self.arm | other.arm,
                           self.base | other.base,
                           self.led | other.led)
-    
+
     def __eq__(self, other):
         return self.arm == other.arm and self.base == other.base and self.led == other.led
 
@@ -39,7 +39,7 @@ class BitPattern(object):
         return "<BitPattern arm:%s base:%s led:%s>" % (self.arm, self.base, self.led)
 
     def __str__(self):
-        return self.__repr__()    
+        return self.__repr__()
 
 GripsClose =       BitPattern(1, 0, 0)
 CloseGrips =       GripsClose
@@ -75,29 +75,29 @@ class Arm(object):
         case of an exception"""
         try:
             fn()
-        except:
+        except Exception:
             self.tell(Stop)
             raise
 
     def move(self, pattern, time=1):
         """Perform a pattern move with timing and stop"""
         try:
-        	self.tell(pattern)
-        	sleep(time)
+            delf.tell(pattern)
+            sleep(time)
         finally:
-        	self.tell(Stop)
+            self.tell(Stop)
 
     def doActions(self, actions):
         """Params: List of actions - each is a list/tuple of BitPattern and time
          (defaulting to 1 if not set)"""
-        #Validate
+        # Validate
         for action in actions:
             if not 1 <= len(action) <= 2:
                 raise ValueError("Wrong number of parameters in action %s" %
                                  (repr(action)))
             if not isinstance(action[0], BitPattern):
                 raise ValueError("Not a valid action")
-        #Do
+        # Do
         for action in actions:
             if len(action) == 2:
                 time = action[1]
@@ -105,12 +105,14 @@ class Arm(object):
                 time = 1
             self.move(action[0], time)
 
+
 def makeGrabAndMove(baseDir):
-	return [[CloseGrips, 1.1],
-                [ShoulderUp | ElbowUp | WristDown | baseDir],
-                [baseDir, 8.5],
-                [ShoulderDown | ElbowDown | WristUp | baseDir],
-                [OpenGrips]]
+    return [[CloseGrips, 1.1],
+            [ShoulderUp | ElbowUp | WristDown | baseDir],
+            [baseDir, 8.5],
+            [ShoulderDown | ElbowDown | WristUp | baseDir],
+            [OpenGrips]]
+
 
 blink = [[LedOn, 0.5], [Stop, 0.5]] * 3
 block_left = makeGrabAndMove(BaseClockWise) + blink
