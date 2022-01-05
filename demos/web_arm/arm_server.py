@@ -22,14 +22,16 @@ movemap = {
     "LedOn": usb_arm.LedOn
 }
 
+
 @app.route('/move', methods=['POST'])
 def move():
     pattern = movemap[request.form['pattern']]
 
     def inner():
-            yield "starting<br>\n"
-            arm.move(pattern)
-            yield "completed\n"
+        yield "starting<br>\n"
+        arm.move(pattern)
+        yield "completed\n"
     return Response(inner())
+
 
 app.run(host="0.0.0.0")
