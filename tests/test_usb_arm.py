@@ -9,7 +9,7 @@ def time_msec():
 
 class StubUsb:
     def __init__(self):
-        self.ctrl_commands=[]
+        self.ctrl_commands = []
 
     def ctrl_transfer(self, reqType, req, value, idx, data=None, length=None):
         # print("ctl_transfer(%s, %s, %s, %s, %s, %s)" % (reqType, req, value, idx, data, length))
@@ -100,6 +100,7 @@ class UsbArmTest(unittest.TestCase):
     def test_both_grips_action_names_exist(self):
         self.assertEqual(usb_arm.GripsOpen, usb_arm.OpenGrips)
         self.assertEqual(usb_arm.GripsClose, usb_arm.CloseGrips)
+
 
 if __name__ == '__main__':
     unittest.main()
