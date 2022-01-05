@@ -1,16 +1,16 @@
 import usb_arm
 import unittest
 import time
-import functools
-import logging
+
 
 def time_msec():
     return round(time.time() * 1000.0)
 
+
 class StubUsb:
     def __init__(self):
         self.ctrl_commands=[]
-    
+
     def ctrl_transfer(self, reqType, req, value, idx, data=None, length=None):
         # print("ctl_transfer(%s, %s, %s, %s, %s, %s)" % (reqType, req, value, idx, data, length))
         assert reqType == 0x40
@@ -26,7 +26,8 @@ class StubUsb:
 
     def reset(self):
         self.ctrl_commands = []
-        
+
+
 class TestableArm(usb_arm.Arm):
     def __init__(self):
         self.dev = StubUsb()
@@ -39,6 +40,7 @@ class TestableArm(usb_arm.Arm):
 
     def get_ctrl_cmd_list(self):
         return list(map(lambda cmd: cmd[0], self.dev.get_ctrl_commands()))
+
 
 class UsbArmTest(unittest.TestCase):
 
@@ -101,4 +103,3 @@ class UsbArmTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    
