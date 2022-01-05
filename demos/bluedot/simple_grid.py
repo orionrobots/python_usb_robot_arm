@@ -4,6 +4,7 @@ import usb_arm
 
 arm = usb_arm.Arm()
 
+
 def led_pressed(pos):
     arm.tell(usb_arm.LedOn)
 
@@ -45,6 +46,7 @@ def base_pressed(pos):
         arm.tell(usb_arm.BaseCtrClockWise)
     if pos.right:
         arm.tell(usb_arm.BaseClockWise)
+
 
 bd = BlueDot(cols=3, rows=2)
 led = bd[1, 0]
