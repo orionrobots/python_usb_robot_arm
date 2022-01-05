@@ -18,7 +18,7 @@ def make_keymap():
     """Bp - an initialised arm bitpattern.
     returns the keymap"""
     return {
-        K_z: usb_arm.BaseClockWise, 
+        K_z: usb_arm.BaseClockWise,
         K_x: usb_arm.BaseCtrClockWise,
         K_r: usb_arm.CloseGrips,
         K_f: usb_arm.OpenGrips,
