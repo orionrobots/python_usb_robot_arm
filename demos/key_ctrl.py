@@ -12,8 +12,8 @@ def handle_key(arm, delay, key_map, key):
             print("Doing key ", key)
             arm.move(key_map[key], delay)
     arm.safe_tell(do_it)
-  
-  
+
+
 def make_keymap():
     """Bp - an initialised arm bitpattern.
     returns the keymap"""
@@ -28,8 +28,8 @@ def make_keymap():
         K_w: usb_arm.ElbowUp,
         K_d: usb_arm.WristDown,
         K_e: usb_arm.WristUp}
-        
-        
+
+
 def key_loop():
     km = make_keymap()
     try:
@@ -50,9 +50,11 @@ def key_loop():
                     return
                 else:
                     handle(event.key)
-                    
+
+
 def main():
     pygame.init()
     key_loop()
-    
+
+
 main()
