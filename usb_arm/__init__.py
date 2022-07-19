@@ -64,6 +64,8 @@ class Arm(object):
 
     def __init__(self):
         self.dev = usb.core.find(idVendor=0x1267)
+        if not self.dev:
+            raise RuntimeError("USB Arm Not found. Ensure it is plugged in and powered on")
         self.dev.set_configuration()
 
     def tell(self, msg):
