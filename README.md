@@ -98,7 +98,7 @@ know the position of the arm, and wont move it past its limits - which could cau
 Sequences are created as arrays of commands. Each command is an array of the bitpattern, followed by the
 optional time (defaulting to 1 second):
 
-    >>> actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.GripsClose, 0.5], [usb_arm.ElbowUp]]
+    >>> actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.CloseGrips, 0.5], [usb_arm.ElbowUp]]
 
 To issue the action list:
 
@@ -118,7 +118,7 @@ Using this in a python file couldn't be easier. For example you could put this i
 
     import usb_arm
     arm = usb_arm.Arm()
-    actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.GripsClose, 0.5], [usb_arm.ElbowUp]]
+    actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.CloseGrips, 0.5], [usb_arm.ElbowUp]]
     arm.doActions(actions)
     
 You can then run this with python3 demo_arm.py.
