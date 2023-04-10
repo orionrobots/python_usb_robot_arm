@@ -7,16 +7,16 @@ Quick Raspberry Pi Installation
 
 On a terminal at the Raspberry Pi enter these commands:
 
-    curl https://raw.githubusercontent.com/orionrobots/python_usb_robot_arm/master/setup_arm.sh | sudo bash
+    curl https://raw.githubusercontent.com/orionrobots/python_usb_robot_arm/main/setup_arm.sh | sudo bash
 
 I suggest review the setup_arm.sh script above to see what it does.
 
 Requirements for Other OS
 ==========================
 
-This has previously been tested on Linux, OSX and Windows. OSX and Windows require signed drivers which may not easily be avialable.
+This has previously been tested on Linux, OSX and Windows. OSX and Windows require signed drivers which may not easily be available.
 
-* Python 2.7 or 3
+* Python 3 or 2.7
 * Libusb (on linux, mac or windows - http://sourceforge.net/projects/libusb-win32/files/latest/download) - the apt-get package will work.
 * pyusb via pip
 
@@ -152,4 +152,4 @@ Related Work
 * [An alternative Objective-C control program](https://armctrl.codeplex.com)
 * Device assembly manual https://www.robotshop.com/media/files/pdf/owi-535_manual.pdf
 * [OWI (manufacturer) information](http://www.owirobots.com/cart/catalog/OWI-535USB-ROBOTIC-ARM-KIT-with-USB-PC-INTERFACE-Assembled-103.html)
-
+* [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/) 
