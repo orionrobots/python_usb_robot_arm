@@ -1,21 +1,30 @@
-Python Code to drive the Maplin/OWI USB Robot arm
+# Python Code to drive the Maplin/OWI "Edge" USB Robot arm
 
-  Tested on:
-  * Linux
-  * OSX (Lion, Mountain Lion)
-  May work on Windows,.
+The main repository for this is https://github.com/orionrobots/python_usb_robot_arm.
 
-Requirements
-============
-* Python 2.7
-* Libusb
-* pyusb
+[Video Demo](https://www.youtube.com/watch?v=dAvWBOTtGnU)
 
-Usage
-=====
+## Quick Raspberry Pi Installation
+
+On a terminal at the Raspberry Pi enter these commands:
+
+    curl https://raw.githubusercontent.com/orionrobots/python_usb_robot_arm/main/setup_arm.sh | sudo bash
+
+I suggest review the setup_arm.sh script above to see what it does.
+
+## Requirements for Other OS
+
+This has previously been tested on Linux, OSX and Windows. OSX and Windows require signed drivers which may not easily be available.
+
+* Python 3 or 2.7
+* Libusb (on linux, mac or windows - <http://sourceforge.net/projects/libusb-win32/files/latest/download>) - the apt-get package will work.
+* pyusb via pip
+
+## Usage
+
 As a library:
 
-    >>> import arm
+    >>> import usb_arm
 
 To initialise libusb and the arm
 
@@ -32,16 +41,15 @@ It will turn on for 1 second, and automatically turn off. The moveArm function a
 move. You can optionally specify another time, but since the Maplin arm doesn't have any sensors, beware that if
 it reaches limits before the time finishes, then it won't stop.
 
-Actual movement
----------------
+### Actual movement
 
     >>> arm.move(usb_arm.ElbowUp)
 
 The elbow will move up.
 The movements possible:
 
-OpenGrips
-CloseGrips
+GripsOpen (OpenGrips)
+GripsClose (CloseGrips)
 WristUp
 WristDown
 ElbowUp
@@ -53,8 +61,10 @@ BaseCtrClockWise
 
 Stop
 
-Combining Movements
--------------------
+LedOn
+
+## Combining Movements
+
 Movements are based upon the BitPattern class, and you can feed arbitrary bitpatterns to it, but all those the
 arm is currently capable of are represented above.
 
@@ -65,8 +75,7 @@ or operator:
 
 The arm should turn clockwise and bring the elbow up simultaneously for half a second.
 
-Gear Lash
----------
+### Gear Lash
 
 The unmodified arm has a few flaws - it has fairly loose gear chains in the "servos" it uses for the movements.
 To see what I mean try the following:
@@ -79,15 +88,15 @@ which you will need to account for as you use the arm and in programmed sequence
 
 You should now know enough to move the arm to any location.
 
-Sequences of Actions
---------------------
+### Sequences of Actions
+
 You can create programmed sequences of actions for the robot. However, before you issue one of these, ensure you
 know the position of the arm, and wont move it past its limits - which could cause damage to it,
 
 Sequences are created as arrays of commands. Each command is an array of the bitpattern, followed by the
 optional time (defaulting to 1 second):
 
-    >>> actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.CloseGrips, 0.5], [usb_arm.ElbowUp]]
+    >>> actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.GripsClose, 0.5], [usb_arm.ElbowUp]]
 
 To issue the action list:
 
@@ -100,11 +109,20 @@ There are a couple of canned actions already in the module:
     block_right
     left_and_blink
 
-Troubleshooting
-===============
+## An Example Script
 
-Linux - permissions
--------------------
+Using this in a python file couldn't be easier. For example you could put this in demo_arm.py:
+
+    import usb_arm
+    arm = usb_arm.Arm()
+    actions = [[usb_arm.ElbowDown, 0.5], [usb_arm.GripsClose, 0.5], [usb_arm.ElbowUp]]
+    arm.doActions(actions)
+
+You can then run this with python3 demo_arm.py.
+
+## Troubleshooting
+
+### Linux - permissions
 
 You will either need to run as root (not recommended) or modify your system to allow all users access to the device.
 
@@ -116,4 +134,16 @@ and add:
 
 Plug in the device and you should be able to access it. Tested on Ubuntu and Mint Linux versions.
 
+## License
 
+CC BY SA 3.0 - http://creativecommons.org/licenses/by-sa/3.0/
+Creative Commons By Attribution Share-Alike v3.0
+
+## Related Work
+
+* The original reverse engineering of the UBS protocol was done by
+[Vadim Zaliva](http://www.crocodile.org/lord/) and published on [his blog](http://notbrainsurgery.livejournal.com/38622.html)
+* [An alternative Objective-C control program](https://armctrl.codeplex.com)
+* Device assembly manual <https://www.robotshop.com/media/files/pdf/owi-535_manual.pdf>
+* [OWI (manufacturer) information](http://www.owirobots.com/cart/catalog/OWI-535USB-ROBOTIC-ARM-KIT-with-USB-PC-INTERFACE-Assembled-103.html)
+* [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/)
