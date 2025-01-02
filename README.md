@@ -48,20 +48,20 @@ it reaches limits before the time finishes, then it won't stop.
 The elbow will move up.
 The movements possible:
 
-GripsOpen (OpenGrips)
-GripsClose (CloseGrips)
-WristUp
-WristDown
-ElbowUp
-ElbowDown
-ShoulderUp
-ShoulderDown
-BaseClockWise
-BaseCtrClockWise
+- `GripsOpen` (OpenGrips)
+- `GripsClose` (CloseGrips)
+- `WristUp`
+- `WristDown`
+- `ElbowUp`
+- `ElbowDown`
+- `ShoulderUp`
+- `ShoulderDown`
+- `BaseClockWise`
+- `BaseCtrClockWise`
 
-Stop
+- `Stop`
 
-LedOn
+- `LedOn`
 
 ## Combining Movements
 
