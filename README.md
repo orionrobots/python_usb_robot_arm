@@ -147,3 +147,24 @@ Creative Commons By Attribution Share-Alike v3.0
 * Device assembly manual <https://www.robotshop.com/media/files/pdf/owi-535_manual.pdf>
 * [OWI (manufacturer) information](http://www.owirobots.com/cart/catalog/OWI-535USB-ROBOTIC-ARM-KIT-with-USB-PC-INTERFACE-Assembled-103.html)
 * [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/)
+
+## Enabling Debug Logging
+
+There's debug logging for the USB messages in the arm class using python standard logging.
+
+If you want to see what USB messages are being sent, try this:
+
+```python
+>>> import usb_arm
+>>> import logging
+>>> logging.basicConfig(level=logging.DEBUG)
+>>> arm = usb_arm.Arm()
+>>> arm.move(usb_arm.ElbowUp)
+```
+
+You should see debug messages about the USB messages being sent.
+
+```
+DEBUG:usb_arm:Sending ctrl message (<BitPattern arm:16 base:0 led:0>)
+DEBUG:usb_arm:Sending ctrl message (<BitPattern arm:0 base:0 led:0>)
+```
