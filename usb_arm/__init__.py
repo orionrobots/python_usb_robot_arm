@@ -10,6 +10,8 @@ Trouble:
 """
 import usb.core
 from time import sleep
+import logging
+logger = logging.getLogger(__name__)
 
 
 class BitPattern(object):
@@ -61,16 +63,22 @@ LedOn =            BitPattern(0, 0, 1)
 class Arm(object):
     """Arm interface"""
     __slots__ = ['dev']
+    USB_VENDOR = 0x1267
 
     def __init__(self):
-        self.dev = usb.core.find(idVendor=0x1267)
+        self.dev = usb.core.find(idVendor=Arm.USB_VENDOR)
         if not self.dev:
             raise RuntimeError("USB Arm Not found. Ensure it is plugged in and powered on")
         self.dev.set_configuration()
 
     def tell(self, msg):
         """Send a USB messaqe to the arm"""
-        self.dev.ctrl_transfer(0x40, 6, 0x100, 0, msg)
+        bmRequestType = 0x40
+        bRequest = 6
+        wValue = 0x100
+        wIndex = 0
+        logger.debug("Sending ctrl message (%s)", msg)
+        self.dev.ctrl_transfer(bmRequestType, bRequest, wValue, wIndex, msg)
 
     def safe_tell(self, fn):
         """Send a message to the arm, with a stop
