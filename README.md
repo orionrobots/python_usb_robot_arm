@@ -4,6 +4,12 @@ The main repository for this is https://github.com/orionrobots/python_usb_robot_
 
 [Video Demo](https://www.youtube.com/watch?v=dAvWBOTtGnU)
 
+## Advice ahead of time
+
+If you are considering buying this kit, I suggest looking at the more capable and simpler MeArm kit. The MeArm is simpler to build, has servo motors for better control (less gear slop, and positioning instead of dead reckoning), and also simpler to power (D-Cells are not that widely available). This arm does have an additional DOF with the wrist bending.
+
+If you already have this kit, then I hope you find this library and it's information useful.
+
 ## Quick Raspberry Pi Installation
 
 On a terminal at the Raspberry Pi enter these commands:
@@ -143,9 +149,8 @@ Creative Commons By Attribution Share-Alike v3.0
 
 * The original reverse engineering of the UBS protocol was done by
 [Vadim Zaliva](http://www.crocodile.org/lord/) and published on [his blog](http://notbrainsurgery.livejournal.com/38622.html)
-* [An alternative Objective-C control program](https://armctrl.codeplex.com)
-* Device assembly manual <https://www.robotshop.com/media/files/pdf/owi-535_manual.pdf>
-* [OWI (manufacturer) information](http://www.owirobots.com/cart/catalog/OWI-535USB-ROBOTIC-ARM-KIT-with-USB-PC-INTERFACE-Assembled-103.html)
+* [Device assembly manual](https://www.robotpark.com/DT/PRO/91010-OWI-535%20ROBOTIC%20ARM%20EDGE%20KIT_PDF.pdf)
+* [OWI (manufacturer) information](https://www.owirobots.com/store/index.php?l=product_detail&p=138)
 * [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/)
 
 ## Enabling Debug Logging
