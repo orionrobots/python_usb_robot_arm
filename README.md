@@ -147,11 +147,11 @@ Creative Commons By Attribution Share-Alike v3.0
 
 ## Related Work
 
-* The original reverse engineering of the UBS protocol was done by
+* The original reverse engineering of the USB protocol was done by
 [Vadim Zaliva](http://www.crocodile.org/lord/) and published on [his blog](http://notbrainsurgery.livejournal.com/38622.html)
 * [Device assembly manual](https://www.robotpark.com/DT/PRO/91010-OWI-535%20ROBOTIC%20ARM%20EDGE%20KIT_PDF.pdf)
 * [OWI (manufacturer) information](https://www.owirobots.com/store/index.php?l=product_detail&p=138)
-* [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/)
+* [PCB Scans](https://kyllikki.github.io/EdgeRobotArm/) - from Vincent Sanders aka Kyllikki
 
 ## Enabling Debug Logging
 
