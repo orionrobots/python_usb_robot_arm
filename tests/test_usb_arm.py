@@ -1,4 +1,4 @@
-import usb_arm
+import owi_maplin_robot_arm
 import unittest
 import time
 
@@ -28,7 +28,7 @@ class StubUsb:
         self.ctrl_commands = []
 
 
-class TestableArm(usb_arm.Arm):
+class TestableArm(owi_maplin_robot_arm.Arm):
     def __init__(self):
         self.dev = StubUsb()
 
@@ -48,46 +48,46 @@ class UsbArmTest(unittest.TestCase):
         self.arm = TestableArm()
 
     def test_move_includes_correct_verb(self):
-        self.arm.move(usb_arm.LedOn)
+        self.arm.move(owi_maplin_robot_arm.LedOn)
         cmd, time = self.arm.get_ctrl_cmd(0)
-        self.assertEqual(usb_arm.LedOn, cmd)
+        self.assertEqual(owi_maplin_robot_arm.LedOn, cmd)
 
     def test_move_adds_stop_verb(self):
-        self.arm.move(usb_arm.ShoulderDown)
-        self.assertEqual([usb_arm.ShoulderDown, usb_arm.Stop], self.arm.get_ctrl_cmd_list())
+        self.arm.move(owi_maplin_robot_arm.ShoulderDown)
+        self.assertEqual([owi_maplin_robot_arm.ShoulderDown, owi_maplin_robot_arm.Stop], self.arm.get_ctrl_cmd_list())
 
     def test_default_move_time_spaces_commands_as_expected(self):
-        self.arm.move(usb_arm.ElbowUp)
+        self.arm.move(owi_maplin_robot_arm.ElbowUp)
         cmd0, time0 = self.arm.get_ctrl_cmd(0)
         cmd1, time1 = self.arm.get_ctrl_cmd(1)
         self.assertIn(time1 - time0, range(990, 1010))
 
     def test_specific_move_time_spaces_commands_as_expected(self):
-        self.arm.move(usb_arm.ElbowUp, 2)
+        self.arm.move(owi_maplin_robot_arm.ElbowUp, 2)
         cmd0, time0 = self.arm.get_ctrl_cmd(0)
         cmd1, time1 = self.arm.get_ctrl_cmd(1)
         self.assertIn(time1 - time0, range(1090, 2010))
 
     def test_untimed_seq_of_commands_orders_as_expected(self):
-        cmds = [[usb_arm.ElbowUp], [usb_arm.ElbowDown], [usb_arm.ShoulderDown]]
+        cmds = [[owi_maplin_robot_arm.ElbowUp], [owi_maplin_robot_arm.ElbowDown], [owi_maplin_robot_arm.ShoulderDown]]
         self.arm.doActions(cmds)
         expected_cmds = []
         for c in cmds:
             expected_cmds.append(c[0])
-            expected_cmds.append(usb_arm.Stop)
+            expected_cmds.append(owi_maplin_robot_arm.Stop)
         self.assertEqual(expected_cmds, self.arm.get_ctrl_cmd_list())
 
     def test_timed_seq_of_commands_orders_as_expected(self):
-        cmds = [[usb_arm.ElbowUp, 1], [usb_arm.ElbowDown, 2], [usb_arm.ShoulderDown, 3]]
+        cmds = [[owi_maplin_robot_arm.ElbowUp, 1], [owi_maplin_robot_arm.ElbowDown, 2], [owi_maplin_robot_arm.ShoulderDown, 3]]
         self.arm.doActions(cmds)
         expected_cmds = []
         for c in cmds:
             expected_cmds.append(c[0])
-            expected_cmds.append(usb_arm.Stop)
+            expected_cmds.append(owi_maplin_robot_arm.Stop)
         self.assertEqual(expected_cmds, self.arm.get_ctrl_cmd_list())
 
     def test_timed_seq_of_commands_has_expected_times(self):
-        cmds = [[usb_arm.BaseCtrClockWise, 2], [usb_arm.ElbowUp, 4]]
+        cmds = [[owi_maplin_robot_arm.BaseCtrClockWise, 2], [owi_maplin_robot_arm.ElbowUp, 4]]
         self.arm.doActions(cmds)
         cmd0, time0 = self.arm.get_ctrl_cmd(0)
         cmd1, time1 = self.arm.get_ctrl_cmd(1)
@@ -98,8 +98,8 @@ class UsbArmTest(unittest.TestCase):
         self.assertIn(time3 - time2, range(3090, 4010))
 
     def test_both_grips_action_names_exist(self):
-        self.assertEqual(usb_arm.GripsOpen, usb_arm.OpenGrips)
-        self.assertEqual(usb_arm.GripsClose, usb_arm.CloseGrips)
+        self.assertEqual(owi_maplin_robot_arm.GripsOpen, owi_maplin_robot_arm.OpenGrips)
+        self.assertEqual(owi_maplin_robot_arm.GripsClose, owi_maplin_robot_arm.CloseGrips)
 
 
 if __name__ == '__main__':

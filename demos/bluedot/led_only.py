@@ -1,16 +1,16 @@
 from bluedot import BlueDot
 from signal import pause
-import usb_arm
+import owi_maplin_robot_arm
 
-arm = usb_arm.Arm()
+arm = owi_maplin_robot_arm.Arm()
 
 
 def led_pressed(pos):
-    arm.tell(usb_arm.LedOn)
+    arm.tell(owi_maplin_robot_arm.LedOn)
 
 
 def stop(*args):
-    arm.tell(usb_arm.Stop)
+    arm.tell(owi_maplin_robot_arm.Stop)
 
 
 bd = BlueDot(cols=3, rows=2)

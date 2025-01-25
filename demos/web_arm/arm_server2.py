@@ -1,25 +1,25 @@
-import usb_arm
+import owi_maplin_robot_arm
 from flask import Flask, Response, request, render_template
 
 
-arm = usb_arm.Arm()
+arm = owi_maplin_robot_arm.Arm()
 app = Flask(__name__)
 
 movemap = {
-    "GripsClose": usb_arm.GripsClose,
-    "CloseGrips": usb_arm.CloseGrips,
-    "GripsOpen": usb_arm.GripsOpen,
-    "OpenGrips": usb_arm.OpenGrips,
-    "Stop": usb_arm.Stop,
-    "WristUp": usb_arm.WristUp,
-    "WristDown": usb_arm.WristDown,
-    "ElbowUp": usb_arm.ElbowUp,
-    "ElbowDown": usb_arm.ElbowDown,
-    "ShoulderUp": usb_arm.ShoulderUp,
-    "ShoulderDown": usb_arm.ShoulderDown,
-    "BaseClockWise": usb_arm.BaseClockWise,
-    "BaseCtrClockWise": usb_arm.BaseCtrClockWise,
-    "LedOn": usb_arm.LedOn
+    "GripsClose": owi_maplin_robot_arm.GripsClose,
+    "CloseGrips": owi_maplin_robot_arm.CloseGrips,
+    "GripsOpen": owi_maplin_robot_arm.GripsOpen,
+    "OpenGrips": owi_maplin_robot_arm.OpenGrips,
+    "Stop": owi_maplin_robot_arm.Stop,
+    "WristUp": owi_maplin_robot_arm.WristUp,
+    "WristDown": owi_maplin_robot_arm.WristDown,
+    "ElbowUp": owi_maplin_robot_arm.ElbowUp,
+    "ElbowDown": owi_maplin_robot_arm.ElbowDown,
+    "ShoulderUp": owi_maplin_robot_arm.ShoulderUp,
+    "ShoulderDown": owi_maplin_robot_arm.ShoulderDown,
+    "BaseClockWise": owi_maplin_robot_arm.BaseClockWise,
+    "BaseCtrClockWise": owi_maplin_robot_arm.BaseCtrClockWise,
+    "LedOn": owi_maplin_robot_arm.LedOn
 }
 
 

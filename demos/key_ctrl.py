@@ -1,6 +1,6 @@
 """key_ctrl - key based arm controller"""
 from functools import partial
-import usb_arm
+import owi_maplin_robot_arm
 import pygame
 from pygame.locals import *
 import sys
@@ -18,22 +18,22 @@ def make_keymap():
     """Bp - an initialised arm bitpattern.
     returns the keymap"""
     return {
-        K_z: usb_arm.BaseClockWise,
-        K_x: usb_arm.BaseCtrClockWise,
-        K_r: usb_arm.CloseGrips,
-        K_f: usb_arm.OpenGrips,
-        K_a: usb_arm.ShoulderDown,
-        K_q: usb_arm.ShoulderUp,
-        K_s: usb_arm.ElbowDown,
-        K_w: usb_arm.ElbowUp,
-        K_d: usb_arm.WristDown,
-        K_e: usb_arm.WristUp}
+        K_z: owi_maplin_robot_arm.BaseClockWise,
+        K_x: owi_maplin_robot_arm.BaseCtrClockWise,
+        K_r: owi_maplin_robot_arm.CloseGrips,
+        K_f: owi_maplin_robot_arm.OpenGrips,
+        K_a: owi_maplin_robot_arm.ShoulderDown,
+        K_q: owi_maplin_robot_arm.ShoulderUp,
+        K_s: owi_maplin_robot_arm.ElbowDown,
+        K_w: owi_maplin_robot_arm.ElbowUp,
+        K_d: owi_maplin_robot_arm.WristDown,
+        K_e: owi_maplin_robot_arm.WristUp}
 
 
 def key_loop():
     km = make_keymap()
     try:
-        arm = usb_arm.Arm()
+        arm = owi_maplin_robot_arm.Arm()
     except AttributeError:
         print("Please make sure the arm is connected and turned on")
         sys.exit(1)

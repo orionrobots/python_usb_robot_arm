@@ -30,7 +30,7 @@ This has previously been tested on Linux, OSX and Windows. OSX and Windows requi
 
 As a library:
 
-    >>> import usb_arm
+    >>> import owi_maplin_usb_arm as usb_arm
 
 To initialise libusb and the arm
 
