@@ -51,4 +51,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run installer
         run: |
+          # Don't expect this to be root
+          whoami
           source ./install.sh
