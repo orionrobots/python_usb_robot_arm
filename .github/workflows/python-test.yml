@@ -46,7 +46,7 @@ jobs:
       image: debian:bookworm
     defaults:
       run:
-        shell: /usr/bin/bash
+        shell: bash
     steps:
       - uses: actions/checkout@v2
       - name: Run installer
