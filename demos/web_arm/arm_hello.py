@@ -1,8 +1,8 @@
-import usb_arm
+import owi_maplin_robot_arm
 from flask import Flask, Response
 
 
-arm = usb_arm.Arm()
+arm = owi_maplin_robot_arm.Arm()
 app = Flask(__name__)
 
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 def flash():
     def inner():
         yield "starting</br>\n"
-        arm.move(usb_arm.LedOn)
+        arm.move(owi_maplin_robot_arm.LedOn)
         yield "completed\n"
     return Response(inner())
 

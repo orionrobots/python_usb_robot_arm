@@ -1,51 +1,51 @@
 from bluedot import BlueDot
 from signal import pause
-import usb_arm
+import owi_maplin_robot_arm
 
-arm = usb_arm.Arm()
+arm = owi_maplin_robot_arm.Arm()
 
 
 def led_pressed(pos):
-    arm.tell(usb_arm.LedOn)
+    arm.tell(owi_maplin_robot_arm.LedOn)
 
 
 def stop(*args):
-    arm.tell(usb_arm.Stop)
+    arm.tell(owi_maplin_robot_arm.Stop)
 
 
 def grip_pressed(pos):
     if pos.top:
-        arm.tell(usb_arm.GripsClose)
+        arm.tell(owi_maplin_robot_arm.GripsClose)
     if pos.bottom:
-        arm.tell(usb_arm.GripsOpen)
+        arm.tell(owi_maplin_robot_arm.GripsOpen)
 
 
 def wrist_pressed(pos):
     if pos.top:
-        arm.tell(usb_arm.WristUp)
+        arm.tell(owi_maplin_robot_arm.WristUp)
     if pos.bottom:
-        arm.tell(usb_arm.WristDown)
+        arm.tell(owi_maplin_robot_arm.WristDown)
 
 
 def elbow_pressed(pos):
     if pos.top:
-        arm.tell(usb_arm.ElbowUp)
+        arm.tell(owi_maplin_robot_arm.ElbowUp)
     if pos.bottom:
-        arm.tell(usb_arm.ElbowDown)
+        arm.tell(owi_maplin_robot_arm.ElbowDown)
 
 
 def shoulder_pressed(pos):
     if pos.top:
-        arm.tell(usb_arm.ShoulderUp)
+        arm.tell(owi_maplin_robot_arm.ShoulderUp)
     if pos.bottom:
-        arm.tell(usb_arm.ShoulderDown)
+        arm.tell(owi_maplin_robot_arm.ShoulderDown)
 
 
 def base_pressed(pos):
     if pos.left:
-        arm.tell(usb_arm.BaseCtrClockWise)
+        arm.tell(owi_maplin_robot_arm.BaseCtrClockWise)
     if pos.right:
-        arm.tell(usb_arm.BaseClockWise)
+        arm.tell(owi_maplin_robot_arm.BaseClockWise)
 
 
 bd = BlueDot(cols=3, rows=2)
