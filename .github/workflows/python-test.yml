@@ -44,7 +44,9 @@ jobs:
     # specify an debian bookworm container
     container:
       image: debian:bookworm
-
+    defaults:
+      run:
+        shell: /usr/bin/bash
     steps:
       - uses: actions/checkout@v2
       - name: Run installer
