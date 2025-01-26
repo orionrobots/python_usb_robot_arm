@@ -22,9 +22,17 @@ I suggest review the setup_arm.sh script above to see what it does.
 
 This has previously been tested on Linux, OSX and Windows. OSX and Windows require signed drivers which may not easily be available.
 
-* Python 3 or 2.7
+* Python 3
 * Libusb (on linux, mac or windows - <http://sourceforge.net/projects/libusb-win32/files/latest/download>) - the apt-get package will work.
-* pyusb via pip
+* pyusb via pip - a virtual is recommended. 
+
+## Demos
+
+- demos/simple.py - simple demonstration
+- demos/pg_key_ctrl.py - Pygame keypress demo, including moving multiple motors simultaneously. Requires pygame installed in the same venv.
+- demos/sh_key_ctrl.py - Console keypress demo
+- demos/bluedot - Blue dot control demo, may be a bit stale
+- demos/web_arm - Flask web control demo, may be a bit stale
 
 ## Usage
 
