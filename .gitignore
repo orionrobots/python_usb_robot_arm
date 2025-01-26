@@ -4,3 +4,5 @@ __pycache__
 *.pyc
 .idea
 *.dll
+*.egg-info
+.vscode
