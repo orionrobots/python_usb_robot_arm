@@ -1,4 +1,4 @@
-import usb_robot_arm as usb_arm
+import owi_maplin_usb_arm as usb_arm
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
