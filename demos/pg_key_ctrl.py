@@ -8,54 +8,58 @@ from pygame.locals import *
 
 import owi_maplin_usb_arm as usb_arm
 
-
-def handle_key(arm, delay, key_map, key):
-    def do_it():
-        if key in key_map:
-            message = key_map[key]
-            print("Key ", key, "Movement message", message)
-
-            arm.move(message, delay)
-    arm.safe_tell(do_it)
-
-
-def make_keymap():
-    """Bp - an initialised arm bitpattern.
-    returns the keymap"""
-    return {
-        K_z: usb_arm.BaseClockWise,
-        K_x: usb_arm.BaseCtrClockWise,
-        K_r: usb_arm.CloseGrips,
-        K_f: usb_arm.OpenGrips,
-        K_a: usb_arm.ShoulderDown,
-        K_q: usb_arm.ShoulderUp,
-        K_s: usb_arm.ElbowDown,
-        K_w: usb_arm.ElbowUp,
-        K_d: usb_arm.WristDown,
-        K_e: usb_arm.WristUp,
-        K_l: usb_arm.LedOn}
+def handle_keys_held(arm):
+    pressed_keys = pygame.key.get_pressed()
+    pattern = usb_arm.Stop
+    if pressed_keys[K_z]:
+        pattern = pattern | usb_arm.BaseClockWise
+    elif pressed_keys[K_x]:
+        pattern = pattern | usb_arm.BaseCtrClockWise
+    if pressed_keys[K_a]:
+        pattern = pattern | usb_arm.ShoulderDown
+    elif pressed_keys[K_q]:
+        pattern = pattern | usb_arm.ShoulderUp
+    if pressed_keys[K_s]:
+        pattern = pattern | usb_arm.ElbowDown
+    elif pressed_keys[K_w]:
+        pattern = pattern | usb_arm.ElbowUp
+    if pressed_keys[K_d]:
+        pattern = pattern | usb_arm.WristDown
+    elif pressed_keys[K_e]:
+        pattern = pattern | usb_arm.WristUp
+    if pressed_keys[K_r]:
+        pattern = pattern | usb_arm.CloseGrips
+    elif pressed_keys[K_f]:
+        pattern = pattern | usb_arm.OpenGrips
+    if pressed_keys[K_l]:
+        pattern = pattern | usb_arm.LedOn
+    arm.tell(pattern)
 
 
 def key_loop():
-    km = make_keymap()
     try:
         arm = usb_arm.Arm()
     except AttributeError:
         print("Please make sure the arm is connected and turned on")
         sys.exit(1)
-    handle = partial(handle_key, arm, 0.5, km)
-    exit_key = K_ESCAPE
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                return
-            if event.type == KEYDOWN:
-                if event.key == exit_key:
+    pygame.clock = pygame.time.Clock()
+    FPS = 50
+
+    try:
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
                     return
-                else:
-                    handle(event.key)
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        pygame.quit()
+                        return
+            handle_keys_held(arm)
+            pygame.clock.tick(FPS)
+    finally:
+        arm.tell(usb_arm.Stop)
 
 
 def main():
@@ -64,6 +68,12 @@ def main():
     pygame.init()
     pygame.display.set_mode([200, 200])
     print("Press z/x to turn the base motor")
+    print("Press a/q to move the shoulder up/down")
+    print("Press w/s to move the elbow up/down")
+    print("Press e/d to move the wrist up/down")
+    print("Press r/f to close/open the grips")
+    print("Press l to toggle the LED")
+    print("Press ESC to exit")
     key_loop()
 
 
