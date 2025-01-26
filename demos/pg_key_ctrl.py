@@ -1,4 +1,4 @@
-"""key_ctrl - key based arm controller"""
+"""Pygame key_ctrl - key based arm controller"""
 from functools import partial
 import logging
 import sys
