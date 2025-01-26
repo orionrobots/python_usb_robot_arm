@@ -4,8 +4,9 @@ Requires readchar
 from functools import partial
 import logging
 import sys
+import time
 
-from readchar import readchar, key
+from readchar import readkey, key
 
 import owi_maplin_usb_arm as usb_arm
 
@@ -24,15 +25,12 @@ KEYMAP =  {
     'l': usb_arm.LedOn
 }
 
-def handle_key(arm, delay, pressed_key):
-    def do_it():
-        if pressed_key in KEYMAP:
-            message = KEYMAP[pressed_key]
-            print("Key ", pressed_key, "Movement message", message)
+def handle_key(arm, pressed_key):
+    if pressed_key in KEYMAP:
+        message = KEYMAP[pressed_key]
+        print("Key ", pressed_key, "Movement message", message)
 
-            arm.move(message, delay)
-    arm.safe_tell(do_it)
-
+        arm.move(message, 0.5)
 
 def key_loop():
     try:
@@ -40,15 +38,16 @@ def key_loop():
     except AttributeError:
         print("Please make sure the arm is connected and turned on")
         sys.exit(1)
-    handle = partial(handle_key, arm, 0.5)
+    handle = partial(handle_key, arm)
     exit_key = key.ESC
 
     while True:
-        pressed_key = readchar()
+        pressed_key = readkey()
         if pressed_key == exit_key:
             return
         else:
             handle(pressed_key)
+        time.sleep(0.1)
 
 def main():
     logging.basicConfig()
