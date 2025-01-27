@@ -147,7 +147,7 @@ and add:
 
     SUBSYSTEM=="usb", ATTR{idVendor}=="1267", ATTR{idProduct}=="0000", MODE:="0666"
 
-Note: **idProduct** can vary (0000, 00001, etc.).
+Note: **idProduct** can vary (0000, 0001, etc.).
 You can check these via the **lsusb** terminal command.
 
 
