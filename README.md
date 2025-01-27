@@ -14,9 +14,9 @@ If you already have this kit, then I hope you find this library and it's informa
 
 On a terminal at the Raspberry Pi enter these commands:
 
-    curl https://raw.githubusercontent.com/orionrobots/python_usb_robot_arm/main/setup_arm.sh | sudo bash
+    curl https://raw.githubusercontent.com/orionrobots/python_usb_robot_arm/main/install.sh | sudo bash
 
-I suggest review the setup_arm.sh script above to see what it does.
+I suggest review the install.sh script above to see what it does.
 
 ## Requirements for Other OS
 

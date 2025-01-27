@@ -38,3 +38,19 @@ jobs:
     #     - name: Test with pytest
     #       run: |
     #         pytest
+
+  test_pi_installer_script:
+    runs-on: ubuntu-latest
+    # specify an debian bookworm container
+    container:
+      image: debian:bookworm
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run installer
+        run: |
+          # Don't expect this to be root
+          whoami
+          source ./install.sh
