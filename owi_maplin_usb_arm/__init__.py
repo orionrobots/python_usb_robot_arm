@@ -73,7 +73,7 @@ class Arm(object):
 
     def tell(self, msg):
         """Send a USB messaqe to the arm"""
-        bmRequestType = 0x40
+        bmRequestType = usb.TYPE_VENDOR
         bRequest = 6
         wValue = 0x100
         wIndex = 0
